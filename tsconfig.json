@@ -1,0 +1,46 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"ESNext"
+		],
+		"types": [
+			"node"
+		],
+		"target": "ESNext",
+		"module": "NodeNext",
+		"allowJs": true,
+		"checkJs": true,
+		"moduleResolution": "NodeNext",
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"allowImportingTsExtensions": true,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+		"verbatimModuleSyntax": true,
+		"removeComments": false,
+		"declaration": true,
+		"declarationMap": true,
+		"noEmit": true,
+		"strict": true,
+		"skipLibCheck": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"baseUrl": ".",
+		"outDir": "./dist",
+		"rootDir": "./src"
+	},
+	"include": [
+		"*.ts",
+		"*.mts",
+		"*.cts",
+		"**/*.ts",
+		"**/*.mts",
+		"**/*.cts"
+	],
+	"exclude": [
+		"dist",
+		"node_modules",
+		"services"
+	]
+}

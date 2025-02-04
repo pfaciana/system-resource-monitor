@@ -1,0 +1,25 @@
+{
+	"name": "system-resource-monitor",
+	"description": "A set of node utility functions for monitoring system resources such as CPU usage, memory usage, and thread utilization",
+	"version": "1.0.0",
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc --project tsconfig.json",
+		"prepublishOnly": "npm run build"
+	},
+	"devDependencies": {
+		"@types/node": "^22",
+		"typescript": "^5"
+	}
+}

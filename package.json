@@ -15,8 +15,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "tsc --project tsconfig.json",
-		"prepublishOnly": "npm run build"
+		"build": "tsc --project tsconfig.json"
 	},
 	"devDependencies": {
 		"@types/node": "^22",

@@ -64,7 +64,7 @@ const getStartState = async () => {
 			const tempStartState = getThreadState()
 			await delay(500)
 			startState = tempStartState
-		}, 1000)
+		}, 1000).unref()
 	}
 	return startState
 }

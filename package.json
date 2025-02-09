@@ -1,7 +1,7 @@
 {
 	"name": "system-resource-monitor",
 	"description": "A set of node utility functions for monitoring system resources such as CPU usage, memory usage, and thread utilization",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"type": "module",
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",

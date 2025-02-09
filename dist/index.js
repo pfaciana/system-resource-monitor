@@ -3,7 +3,7 @@ import { execSync } from 'node:child_process'
 
 export const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
-const round = (num, precision = 0) => {
+export const round = (num, precision = 0) => {
 	const factor = Math.pow(10, precision)
 	return Math.round(num * factor) / factor
 }

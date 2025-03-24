@@ -1,46 +1,86 @@
 {
 	"compilerOptions": {
-		"lib": [
-			"ESNext"
+		// Type Checking
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"alwaysStrict": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": false,
+		"noImplicitOverride": true,
+		"noImplicitReturns": false,
+		"noImplicitThis": true,
+		"noUncheckedIndexedAccess": false,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strict": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"useUnknownInCatchVariables": true,
+		
+		// Modules
+		"allowImportingTsExtensions": true,
+		"baseUrl": ".",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"resolveJsonModule": true,
+		"rootDir": "./src",
+		"typeRoots": [
+			"./node_modules/@types"
 		],
 		"types": [
 			"node"
 		],
-		"target": "ESNext",
-		"module": "NodeNext",
-		"allowJs": true,
-		"checkJs": true,
-		"moduleResolution": "NodeNext",
-		"esModuleInterop": true,
-		"resolveJsonModule": true,
-		"allowImportingTsExtensions": true,
-		"allowSyntheticDefaultImports": true,
-		"forceConsistentCasingInFileNames": true,
-		"verbatimModuleSyntax": true,
-		"removeComments": false,
+		
+		// Emit
 		"declaration": true,
 		"declarationMap": true,
 		"noEmit": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"baseUrl": ".",
+		"newLine": "lf",
 		"outDir": "./dist",
-		"rootDir": "./src"
+		"removeComments": false,
+		
+		// JavaScript Support
+		"allowJs": true,
+		"checkJs": true,
+		
+		// Interop Constraints
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		
+		// Language and Environment
+		"lib": [
+			"ESNext",
+			"DOM",
+			"DOM.Iterable",
+			"WebWorker"
+		],
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		
+		// Output Formatting
+		"noErrorTruncation": false,
+		
+		// Completeness
+		"skipLibCheck": true
 	},
 	"include": [
-		"*.ts",
-		"*.mts",
-		"*.cts",
-		"**/*.ts",
-		"**/*.mts",
-		"**/*.cts"
+		"src/**/*.ts",
+		"src/**/*.cts",
+		"src/**/*.mts"
 	],
 	"exclude": [
+		"**/*.test.cts",
+		"**/*.test.mts",
+		"**/*.test.ts",
+		"src/fixtures/*",
 		"dist",
-		"node_modules",
-		"services"
+		"docs",
+		"examples",
+		"node_modules"
 	]
 }

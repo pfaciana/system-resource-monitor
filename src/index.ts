@@ -90,7 +90,7 @@ const getStartState = async (): Promise<ThreadState[]> => {
 	}
 	return startState
 }
-await getStartState()
+getStartState()
 
 export const cleanup = (): void => {
 	if (stateUpdateInterval) {

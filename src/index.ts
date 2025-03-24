@@ -16,7 +16,7 @@ export const getPlatform = (): string => platform
 const logicalCoreCount = os.cpus().length
 export const getLogicalCoreCount = (): number => logicalCoreCount
 
-const physicalCores = (() => {
+const physicalCores = ((): number => {
 	try {
 		if (platform === 'linux') {
 			const output = execSync('lscpu -p | egrep -v "^#" | sort -u -t, -k 2,4 | wc -l', { encoding: 'utf8' }).toString()
@@ -40,7 +40,7 @@ const physicalCores = (() => {
 
 export const getPhysicalCoreCount = () => physicalCores
 
-interface CpuTimes {
+export interface CpuTimes {
 	idle: number;
 	irq: number;
 	nice: number;
@@ -48,19 +48,19 @@ interface CpuTimes {
 	user: number;
 }
 
-interface CpuInfo {
+export interface CpuInfo {
 	model: string;
 	speed: number;
 	times: CpuTimes;
 }
 
-interface ThreadState {
+export interface ThreadState {
 	index: number;
 	total: number;
 	idle: number;
 }
 
-type ThreadUsage = number;
+export type ThreadUsage = number;
 
 // Threads
 

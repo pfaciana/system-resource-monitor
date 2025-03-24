@@ -34,8 +34,8 @@ const physicalCores = (() => {
 		}
 	} catch (error) {
 		console.error('Error getting physical core count:', error)
-		return logicalCoreCount / 2
 	}
+	return Math.max(1, Math.floor(logicalCoreCount / 2))
 })()
 
 export const getPhysicalCoreCount = () => physicalCores

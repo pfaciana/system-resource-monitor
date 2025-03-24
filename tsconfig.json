@@ -20,7 +20,7 @@
 		"useUnknownInCatchVariables": true,
 		
 		// Modules
-		"allowImportingTsExtensions": true,
+		"allowImportingTsExtensions": false,
 		"baseUrl": ".",
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
@@ -36,7 +36,7 @@
 		// Emit
 		"declaration": true,
 		"declarationMap": true,
-		"noEmit": true,
+		"noEmit": false,
 		"newLine": "lf",
 		"outDir": "./dist",
 		"removeComments": false,

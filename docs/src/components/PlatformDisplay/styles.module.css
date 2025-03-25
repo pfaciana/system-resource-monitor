@@ -1,0 +1,77 @@
+.platformSection {
+  padding: 5rem 0;
+  background-color: var(--ifm-color-emphasis-0);
+  text-align: center;
+}
+
+.sectionHeader {
+  margin-bottom: 3rem;
+}
+
+.sectionHeader h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.platformLogos {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 3rem;
+}
+
+.platformLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.platformLogo:hover {
+  transform: translateY(-10px);
+}
+
+.platformIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ifm-color-primary);
+}
+
+.platformIcon svg {
+  /* Allow SVG to use its own size attributes */
+  width: 100%;
+  height: 100%;
+}
+
+.platformName {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 996px) {
+  .platformLogos {
+    gap: 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .platformLogos {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .platformLogo {
+    width: 100%;
+    max-width: 200px;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Examples",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Practical guides to help you implement common tasks with the System Resource Monitor library."
+  }
+}

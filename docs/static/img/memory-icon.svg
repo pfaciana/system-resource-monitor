@@ -1,0 +1,254 @@
+<svg width="310" height="270" viewBox="45 45 310 270" xmlns="http://www.w3.org/2000/svg">
+    <!-- TOP MEMORY STICK -->
+    <g id="memory-stick-top" transform="translate(0, 0)">
+        <!-- PCB Board Background -->
+        <rect x="50" y="50" width="300" height="100" fill="#006600" stroke="#004400" stroke-width="2" rx="5" ry="5" />
+
+        <!-- Circuit Traces -->
+        <g stroke="#D4AF37" stroke-width="1">
+            <!-- Horizontal traces -->
+            <line x1="80" y1="70" x2="320" y2="70" />
+            <line x1="80" y1="90" x2="320" y2="90" />
+            <line x1="80" y1="110" x2="320" y2="110" />
+            <line x1="80" y1="130" x2="320" y2="130" />
+
+            <!-- Vertical traces -->
+            <line x1="100" y1="60" x2="100" y2="140" />
+            <line x1="150" y1="60" x2="150" y2="140" />
+            <line x1="200" y1="60" x2="200" y2="140" />
+            <line x1="250" y1="60" x2="250" y2="140" />
+            <line x1="300" y1="60" x2="300" y2="140" />
+        </g>
+
+        <!-- Memory Chips -->
+        <g>
+            <!-- Left Side Chips -->
+            <rect x="90" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="90" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+
+            <!-- Middle-Left Chips -->
+            <rect x="160" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="160" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+
+            <!-- Middle-Right Chips -->
+            <rect x="210" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="210" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+
+            <!-- Right Side Chips -->
+            <rect x="280" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="280" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+        </g>
+
+        <!-- Chip Details -->
+        <g fill="none" stroke="#80B0D0" stroke-width="0.5">
+            <rect x="95" y="80" width="30" height="10" />
+            <rect x="95" y="110" width="30" height="10" />
+            <rect x="165" y="80" width="30" height="10" />
+            <rect x="165" y="110" width="30" height="10" />
+            <rect x="215" y="80" width="30" height="10" />
+            <rect x="215" y="110" width="30" height="10" />
+            <rect x="285" y="80" width="30" height="10" />
+            <rect x="285" y="110" width="30" height="10" />
+        </g>
+
+        <!-- Chip Labels -->
+        <g font-family="Arial" font-size="6" fill="#D0E0F0" text-anchor="middle">
+            <text x="110" y="87">DDR4</text>
+            <text x="110" y="117">DDR4</text>
+            <text x="180" y="87">DDR4</text>
+            <text x="180" y="117">DDR4</text>
+            <text x="230" y="87">DDR4</text>
+            <text x="230" y="117">DDR4</text>
+            <text x="300" y="87">DDR4</text>
+            <text x="300" y="117">DDR4</text>
+        </g>
+
+        <!-- DIMM Label -->
+        <text x="200" y="65" font-family="Arial" font-size="10" text-anchor="middle" fill="#D0E0F0" font-weight="bold">16GB DDR4-3200</text>
+
+        <!-- Gold Connector Pins -->
+        <g fill="#D4AF37">
+            <rect x="60" y="150" width="10" height="5" />
+            <rect x="75" y="150" width="10" height="5" />
+            <rect x="90" y="150" width="10" height="5" />
+            <rect x="105" y="150" width="10" height="5" />
+            <rect x="120" y="150" width="10" height="5" />
+            <rect x="135" y="150" width="10" height="5" />
+            <rect x="150" y="150" width="10" height="5" />
+            <rect x="165" y="150" width="10" height="5" />
+            <rect x="180" y="150" width="10" height="5" />
+            <rect x="195" y="150" width="10" height="5" />
+            <rect x="210" y="150" width="10" height="5" />
+            <rect x="225" y="150" width="10" height="5" />
+            <rect x="240" y="150" width="10" height="5" />
+            <rect x="255" y="150" width="10" height="5" />
+            <rect x="270" y="150" width="10" height="5" />
+            <rect x="285" y="150" width="10" height="5" />
+            <rect x="300" y="150" width="10" height="5" />
+            <rect x="315" y="150" width="10" height="5" />
+            <rect x="330" y="150" width="10" height="5" />
+        </g>
+
+        <!-- Edge Notch -->
+        <path d="M185,150 L185,155 L215,155 L215,150" fill="#006600" stroke="#004400" stroke-width="1" />
+
+        <!-- Surface Mount Components -->
+        <g>
+            <!-- Resistors -->
+            <rect x="80" y="65" width="5" height="2" fill="#000000" />
+            <rect x="140" y="65" width="5" height="2" fill="#000000" />
+            <rect x="260" y="65" width="5" height="2" fill="#000000" />
+            <rect x="320" y="65" width="5" height="2" fill="#000000" />
+
+            <!-- Capacitors -->
+            <circle cx="75" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+            <circle cx="130" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+            <circle cx="270" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+            <circle cx="325" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+        </g>
+
+        <!-- Highlight Effects -->
+        <rect x="50" y="50" width="300" height="3" fill="rgba(255,255,255,0.2)" />
+        <rect x="50" y="50" width="3" height="100" fill="rgba(255,255,255,0.15)" />
+
+        <!-- Shadow Effects -->
+        <rect x="50" y="147" width="300" height="3" fill="rgba(0,0,0,0.3)" />
+        <rect x="347" y="50" width="3" height="100" fill="rgba(0,0,0,0.2)" />
+    </g>
+
+    <!-- BOTTOM MEMORY STICK - Using transform to position -->
+    <g id="memory-stick-bottom" transform="translate(0, 155)">
+        <!-- PCB Board Background -->
+        <rect x="50" y="50" width="300" height="100" fill="#006600" stroke="#004400" stroke-width="2" rx="5" ry="5" />
+
+        <!-- Circuit Traces -->
+        <g stroke="#D4AF37" stroke-width="1">
+            <!-- Horizontal traces -->
+            <line x1="80" y1="70" x2="320" y2="70" />
+            <line x1="80" y1="90" x2="320" y2="90" />
+            <line x1="80" y1="110" x2="320" y2="110" />
+            <line x1="80" y1="130" x2="320" y2="130" />
+
+            <!-- Vertical traces -->
+            <line x1="100" y1="60" x2="100" y2="140" />
+            <line x1="150" y1="60" x2="150" y2="140" />
+            <line x1="200" y1="60" x2="200" y2="140" />
+            <line x1="250" y1="60" x2="250" y2="140" />
+            <line x1="300" y1="60" x2="300" y2="140" />
+        </g>
+
+        <!-- Memory Chips -->
+        <g>
+            <!-- Left Side Chips -->
+            <rect x="90" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="90" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+
+            <!-- Middle-Left Chips -->
+            <rect x="160" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="160" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+
+            <!-- Middle-Right Chips -->
+            <rect x="210" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="210" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+
+            <!-- Right Side Chips -->
+            <rect x="280" y="75" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+            <rect x="280" y="105" width="40" height="20" fill="#303040" stroke="#404050" stroke-width="1" />
+        </g>
+
+        <!-- Chip Details -->
+        <g fill="none" stroke="#80B0D0" stroke-width="0.5">
+            <rect x="95" y="80" width="30" height="10" />
+            <rect x="95" y="110" width="30" height="10" />
+            <rect x="165" y="80" width="30" height="10" />
+            <rect x="165" y="110" width="30" height="10" />
+            <rect x="215" y="80" width="30" height="10" />
+            <rect x="215" y="110" width="30" height="10" />
+            <rect x="285" y="80" width="30" height="10" />
+            <rect x="285" y="110" width="30" height="10" />
+        </g>
+
+        <!-- Chip Labels -->
+        <g font-family="Arial" font-size="6" fill="#D0E0F0" text-anchor="middle">
+            <text x="110" y="87">DDR4</text>
+            <text x="110" y="117">DDR4</text>
+            <text x="180" y="87">DDR4</text>
+            <text x="180" y="117">DDR4</text>
+            <text x="230" y="87">DDR4</text>
+            <text x="230" y="117">DDR4</text>
+            <text x="300" y="87">DDR4</text>
+            <text x="300" y="117">DDR4</text>
+        </g>
+
+        <!-- DIMM Label -->
+        <text x="200" y="65" font-family="Arial" font-size="10" text-anchor="middle" fill="#D0E0F0" font-weight="bold">16GB DDR4-3200</text>
+
+        <!-- Gold Connector Pins -->
+        <g fill="#D4AF37">
+            <rect x="60" y="150" width="10" height="5" />
+            <rect x="75" y="150" width="10" height="5" />
+            <rect x="90" y="150" width="10" height="5" />
+            <rect x="105" y="150" width="10" height="5" />
+            <rect x="120" y="150" width="10" height="5" />
+            <rect x="135" y="150" width="10" height="5" />
+            <rect x="150" y="150" width="10" height="5" />
+            <rect x="165" y="150" width="10" height="5" />
+            <rect x="180" y="150" width="10" height="5" />
+            <rect x="195" y="150" width="10" height="5" />
+            <rect x="210" y="150" width="10" height="5" />
+            <rect x="225" y="150" width="10" height="5" />
+            <rect x="240" y="150" width="10" height="5" />
+            <rect x="255" y="150" width="10" height="5" />
+            <rect x="270" y="150" width="10" height="5" />
+            <rect x="285" y="150" width="10" height="5" />
+            <rect x="300" y="150" width="10" height="5" />
+            <rect x="315" y="150" width="10" height="5" />
+            <rect x="330" y="150" width="10" height="5" />
+        </g>
+
+        <!-- Edge Notch -->
+        <path d="M185,150 L185,155 L215,155 L215,150" fill="#006600" stroke="#004400" stroke-width="1" />
+
+        <!-- Surface Mount Components -->
+        <g>
+            <!-- Resistors -->
+            <rect x="80" y="65" width="5" height="2" fill="#000000" />
+            <rect x="140" y="65" width="5" height="2" fill="#000000" />
+            <rect x="260" y="65" width="5" height="2" fill="#000000" />
+            <rect x="320" y="65" width="5" height="2" fill="#000000" />
+
+            <!-- Capacitors -->
+            <circle cx="75" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+            <circle cx="130" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+            <circle cx="270" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+            <circle cx="325" cy="135" r="3" fill="#444444" stroke="#666666" stroke-width="0.5" />
+        </g>
+
+        <!-- Highlight Effects -->
+        <rect x="50" y="50" width="300" height="3" fill="rgba(255,255,255,0.2)" />
+        <rect x="50" y="50" width="3" height="100" fill="rgba(255,255,255,0.15)" />
+
+        <!-- Shadow Effects -->
+        <rect x="50" y="147" width="300" height="3" fill="rgba(0,0,0,0.3)" />
+        <rect x="347" y="50" width="3" height="100" fill="rgba(0,0,0,0.2)" />
+    </g>
+
+    <!-- USAGE INSTRUCTIONS (commented out) -->
+    <!--
+      To adjust the position of each memory stick:
+
+      1. For the top memory stick, modify the transform attribute in the
+         <g id="memory-stick-top" transform="translate(0, 0)"> element.
+
+      2. For the bottom memory stick, modify the transform attribute in the
+         <g id="memory-stick-bottom" transform="translate(0, 195)"> element.
+
+      3. The transform values are: translate(x-offset, y-offset)
+         - Increase x-offset to move right, decrease to move left
+         - Increase y-offset to move down, decrease to move up
+
+      4. If you need to adjust the overall SVG size, modify:
+         - The width and height attributes in the root <svg> element
+         - The viewBox attribute in the root <svg> element
+    -->
+</svg>

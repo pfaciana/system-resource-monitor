@@ -1,0 +1,52 @@
+.statsVisual {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 75%;
+  margin: 0 auto;
+}
+
+.statCard {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.statCard:last-child {
+  margin-bottom: 0;
+}
+
+.statValue {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+}
+
+.progressBar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  transition: width 0.5s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+  .statsVisual {
+    max-width: 320px;
+  }
+}

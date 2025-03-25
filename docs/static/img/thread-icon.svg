@@ -1,0 +1,168 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="300" height="300" fill="#252535" rx="5" ry="5" />
+
+  <!-- Grid Lines -->
+  <g stroke="#3A3A4A" stroke-width="1" opacity="0.6">
+    <!-- Horizontal -->
+    <line x1="20" y1="30" x2="280" y2="30" />
+    <line x1="20" y1="80" x2="280" y2="80" />
+    <line x1="20" y1="130" x2="280" y2="130" />
+    <line x1="20" y1="180" x2="280" y2="180" />
+    <line x1="20" y1="230" x2="280" y2="230" />
+    <line x1="20" y1="280" x2="280" y2="280" />
+
+    <!-- Vertical -->
+    <line x1="50" y1="20" x2="50" y2="280" />
+    <line x1="100" y1="20" x2="100" y2="280" />
+    <line x1="150" y1="20" x2="150" y2="280" />
+    <line x1="200" y1="20" x2="200" y2="280" />
+    <line x1="250" y1="20" x2="250" y2="280" />
+  </g>
+
+  <!-- Core 1 (Top Left) -->
+  <g id="core-1">
+    <rect x="30" y="20" width="90" height="90" fill="#303040" stroke="#505060" stroke-width="2" />
+    <rect x="42" y="32" width="66" height="66" fill="#404050" stroke="#606070" stroke-width="1" />
+    <circle cx="75" cy="65" r="22" fill="#606070" stroke="#707080" stroke-width="1" />
+    <text x="75" y="69" font-family="Arial" font-size="12" text-anchor="middle" fill="#D0E0F0">CORE 1</text>
+
+    <!-- Activity Indicator -->
+    <rect x="48" y="85" width="55" height="5" fill="none" stroke="#80B0D0" stroke-width="1" />
+    <rect x="48" y="85" width="33" height="5" fill="#80B0D0" stroke="none">
+      <animate attributeName="width" values="5;44;5" dur="2s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Core 2 (Top Right) -->
+  <g id="core-2">
+    <rect x="180" y="20" width="90" height="90" fill="#303040" stroke="#505060" stroke-width="2" />
+    <rect x="192" y="32" width="66" height="66" fill="#404050" stroke="#606070" stroke-width="1" />
+    <circle cx="225" cy="65" r="22" fill="#606070" stroke="#707080" stroke-width="1" />
+    <text x="225" y="69" font-family="Arial" font-size="12" text-anchor="middle" fill="#D0E0F0">CORE 2</text>
+
+    <!-- Activity Indicator -->
+    <rect x="197" y="85" width="55" height="5" fill="none" stroke="#80B0D0" stroke-width="1" />
+    <rect x="197" y="85" width="33" height="5" fill="#80B0D0" stroke="none">
+      <animate attributeName="width" values="44;11;44" dur="1.7s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Core 3 (Bottom Left) -->
+  <g id="core-3">
+    <rect x="30" y="190" width="90" height="90" fill="#303040" stroke="#505060" stroke-width="2" />
+    <rect x="42" y="202" width="66" height="66" fill="#404050" stroke="#606070" stroke-width="1" />
+    <circle cx="75" cy="235" r="22" fill="#606070" stroke="#707080" stroke-width="1" />
+    <text x="75" y="239" font-family="Arial" font-size="12" text-anchor="middle" fill="#D0E0F0">CORE 3</text>
+
+    <!-- Activity Indicator -->
+    <rect x="48" y="255" width="55" height="5" fill="none" stroke="#80B0D0" stroke-width="1" />
+    <rect x="48" y="255" width="33" height="5" fill="#80B0D0" stroke="none">
+      <animate attributeName="width" values="27;49;27" dur="2.4s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Core 4 (Bottom Right) -->
+  <g id="core-4">
+    <rect x="180" y="190" width="90" height="90" fill="#303040" stroke="#505060" stroke-width="2" />
+    <rect x="192" y="202" width="66" height="66" fill="#404050" stroke="#606070" stroke-width="1" />
+    <circle cx="225" cy="235" r="22" fill="#606070" stroke="#707080" stroke-width="1" />
+    <text x="225" y="239" font-family="Arial" font-size="12" text-anchor="middle" fill="#D0E0F0">CORE 4</text>
+
+    <!-- Activity Indicator -->
+    <rect x="197" y="255" width="55" height="5" fill="none" stroke="#80B0D0" stroke-width="1" />
+    <rect x="197" y="255" width="33" height="5" fill="#80B0D0" stroke="none">
+      <animate attributeName="width" values="16;38;16" dur="1.5s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Central Hub -->
+  <g id="hub">
+    <rect x="120" y="120" width="60" height="60" fill="#004080" stroke="#0060A0" stroke-width="2" />
+    <text x="150" y="153" font-family="Arial" font-size="10" text-anchor="middle" fill="#D0E0F0">BUS</text>
+
+    <!-- Hub Activity Indicators -->
+    <circle cx="132" cy="138" r="4" fill="#80B0D0">
+      <animate attributeName="fill-opacity" values="1;0.3;1" dur="0.7s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="150" cy="138" r="4" fill="#80B0D0">
+      <animate attributeName="fill-opacity" values="0.3;1;0.3" dur="1.3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="168" cy="138" r="4" fill="#80B0D0">
+      <animate attributeName="fill-opacity" values="0.6;0.2;0.6" dur="0.9s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- Connection Paths -->
+  <g id="connections" stroke="#80B0D0" stroke-width="2">
+    <!-- Core 1 to Hub -->
+    <path d="M75,110 L75,135 L120,135" fill="none">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="2.1s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Core 2 to Hub -->
+    <path d="M225,110 L225,135 L180,135" fill="none">
+      <animate attributeName="stroke-opacity" values="0.7;0.3;0.7" dur="1.6s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Core 3 to Hub -->
+    <path d="M75,190 L75,165 L120,165" fill="none">
+      <animate attributeName="stroke-opacity" values="1;0.5;1" dur="1.9s" repeatCount="indefinite" />
+    </path>
+
+    <!-- Core 4 to Hub -->
+    <path d="M225,190 L225,165 L180,165" fill="none">
+      <animate attributeName="stroke-opacity" values="0.3;0.8;0.3" dur="2.3s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  <!-- Data Packets -->
+  <g id="data-packets">
+    <!-- Packet 1 (Core 1 to Hub) -->
+    <rect x="0" y="0" width="7" height="7" fill="#D0E0F0">
+      <animateMotion path="M75,110 L75,135 L120,135" dur="3s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- Packet 2 (Hub to Core 2) -->
+    <rect x="0" y="0" width="7" height="7" fill="#D0E0F0">
+      <animateMotion path="M180,135 L225,135 L225,110" dur="2.5s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- Packet 3 (Core 3 to Hub) -->
+    <rect x="0" y="0" width="7" height="7" fill="#D0E0F0">
+      <animateMotion path="M75,190 L75,165 L120,165" dur="3.2s" repeatCount="indefinite" />
+    </rect>
+
+    <!-- Packet 4 (Hub to Core 4) -->
+    <rect x="0" y="0" width="7" height="7" fill="#D0E0F0">
+      <animateMotion path="M180,165 L225,165 L225,190" dur="2.8s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Thread Connection Lines -->
+  <g stroke="#D4AF37" stroke-width="1" stroke-dasharray="4,2" opacity="0.8">
+    <!-- Horizontal Thread Connections -->
+    <line x1="120" y1="65" x2="180" y2="65">
+      <animate attributeName="stroke-opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite" />
+    </line>
+    <line x1="120" y1="235" x2="180" y2="235">
+      <animate attributeName="stroke-opacity" values="0.2;0.8;0.2" dur="1.7s" repeatCount="indefinite" />
+    </line>
+
+    <!-- Vertical Thread Connections -->
+    <line x1="75" y1="110" x2="75" y2="190">
+      <animate attributeName="stroke-opacity" values="0.3;0.9;0.3" dur="1.9s" repeatCount="indefinite" />
+    </line>
+    <line x1="225" y1="110" x2="225" y2="190">
+      <animate attributeName="stroke-opacity" values="0.5;1;0.5" dur="2.1s" repeatCount="indefinite" />
+    </line>
+
+    <!-- Diagonal Thread Connections -->
+    <line x1="95" y1="85" x2="205" y2="215">
+      <animate attributeName="stroke-opacity" values="0.3;0.7;0.3" dur="2.2s" repeatCount="indefinite" />
+    </line>
+    <line x1="205" y1="85" x2="95" y2="215">
+      <animate attributeName="stroke-opacity" values="0.6;0.2;0.6" dur="1.8s" repeatCount="indefinite" />
+    </line>
+  </g>
+</svg>

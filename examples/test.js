@@ -1,7 +1,7 @@
 import {
+	startProfilingCpu, getCpuUsage, isCpuBelow, isCpuAbove,
 	getThreadState, getThreadUsage, getMinThread, getMaxThread, getAvgThread, getMedThread,
 	isAnyThreadBelow, isAnyThreadAbove, areAllThreadsBelow, areAllThreadsAbove,
-	getCpuUsage, isCpuBelow, isCpuAbove,
 	getMemoryUsage, getUsedMemory, getTotalMemory,
 	getPhysicalCoreCount, getLogicalCoreCount, getPlatform,
 	delay,
@@ -48,6 +48,8 @@ async function getCpuData() {
 	console.log('getPhysicalCoreCount: ', getPhysicalCoreCount())
 	console.log('getLogicalCoreCount: ', getLogicalCoreCount())
 }
+
+await startProfilingCpu()
 
 getCpuData()
 

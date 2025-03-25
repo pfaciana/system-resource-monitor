@@ -20,6 +20,8 @@ npm i system-resource-monitor
 
 ```typescript
 import {
+	startProfilingCpu,
+	stopProfilingCpu,
 	getCpuUsage,
 	getThreadUsage,
 	getMemoryUsage,
@@ -27,6 +29,9 @@ import {
 	isAnyThreadAbove,
 	isCpuAbove,
 } from 'system-resource-monitor'
+
+// Initialize CPU profiling (required for CPU and thread monitoring)
+await startProfilingCpu()
 
 // Get CPU usage as percentage
 console.log(`CPU Usage: ${getCpuUsage()}%`)
@@ -46,13 +51,22 @@ console.log(`Is any thread above 80% usage? ${isAbove80}`)
 if (isCpuAbove(80)) {
 	console.log('High CPU usage detected')
 }
+
+// Clean up when done
+stopProfilingCpu()
 ```
 
 ### API Reference
 
-NOTE: percentages represent a number between 0-100, raw usage represents  a number between 0-1
+NOTE: percentages represent a number between 0-100, raw usage represents a number between 0-1
 
 `threshold` parameters are expected to be percentages between 0-100
+
+**Initialization:**
+
+- `startProfilingCpu(): Promise<void>` - Initialize CPU profiling (required for CPU and thread monitoring)
+- `stopProfilingCpu(): void` - Stop CPU profiling and clean up resources
+- `cleanup(): void` - Alias for stopProfilingCpu()
 
 **Core Information:**
 
@@ -60,13 +74,13 @@ NOTE: percentages represent a number between 0-100, raw usage represents  a numb
 - `getLogicalCoreCount(): int` - Returns number of logical CPU cores
 - `getPhysicalCoreCount(): int` - Returns number of physical CPU cores
 
-**CPU Usage:**
+**CPU Usage:** (requires startProfilingCpu)
 
 - `getCpuUsage(inPercent?: boolean, precision?: number): number` - Returns CPU usage as percentage (0-100) or decimal (0-1)
 - `isCpuBelow(threshold: number): boolean` - Checks if CPU usage is below threshold percentage
 - `isCpuAbove(threshold: number): boolean` - Checks if CPU usage is above threshold percentage
 
-**Thread Functions:**
+**Thread Functions:** (requires startProfilingCpu)
 
 - `getThreadState(): ThreadState[]` - Returns current state for each CPU thread
 - `getThreadUsage(): number[]` - Returns usage for each thread as decimals (0-1)
@@ -91,12 +105,12 @@ NOTE: percentages represent a number between 0-100, raw usage represents  a numb
 
 - `delay(ms: number): Promise<void>` - Promise that resolves after specified milliseconds
 - `round(num: number, precision?: number): number` - Rounds number to specified decimal places
-- `cleanup(): void` - Cleans up monitoring state and intervals
 
 ## Considerations
 
 While this library provides useful functionality for monitoring system resources, there are a few things to consider:
 
+- You must call `startProfilingCpu()` before using any CPU or thread monitoring functions. Memory, core information, and utility functions do not require initialization.
 - The core usage logic relies on timing differences between CPU states, which can be inaccurate or unreliable under heavy load or virtualized environments. The accuracy of the resource usage calculations depends on a sampling interval of one second of the system's workload.
 - Calculating CPU usage in real-time is imprecise, especially if your application's workload changes frequently. You should interpret these metrics as estimates.
 - This is not recommended for production environments or precise performance analytics. If you require more extensive system monitoring capabilities or integration with external monitoring tools, you may consider alternatives like:

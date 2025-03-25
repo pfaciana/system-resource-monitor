@@ -87,10 +87,19 @@ const getStartState = async (): Promise<ThreadState[]> => {
 			await delay(500)
 			startState = tempStartState
 		}, 1000)
+
+		if (stateUpdateInterval.unref) {
+			stateUpdateInterval.unref()
+		}
 	}
 	return startState
 }
-getStartState()
+export const startProfilingCpu = async (): Promise<void> => {
+	await getStartState()
+}
+export const stopProfilingCpu = (): void => {
+	cleanup()
+}
 
 export const cleanup = (): void => {
 	if (stateUpdateInterval) {
@@ -122,12 +131,20 @@ const calculateThreadUsage = (startThread: ThreadState, endThread: ThreadState):
 }
 
 export const getThreadUsage = (startThreads: ThreadState[] | null = startState, endThreads: ThreadState[] = getThreadState()): ThreadUsage[] => {
+	if (!startThreads) {
+		console.error('You must run `await startProfilingCpu()` before you can get the thread state')
+		throw new Error('Start threads not available')
+	}
 	return startThreads!.map((startThread, index) => {
 		return calculateThreadUsage(startThread, endThreads[index])
 	})
 }
 
 export const isAnyThreadBelow = (threshold: number = 50, endThreads: ThreadState[] = getThreadState()): boolean => {
+	if (!startState) {
+		console.error('You must run `await startProfilingCpu()` before you can get the thread state')
+		throw new Error('Start threads not available')
+	}
 	const thresholdDecimal = threshold / 100
 	return startState!.some((startThread, index) => {
 		const usage = calculateThreadUsage(startThread, endThreads[index])
@@ -140,6 +157,10 @@ export const isAnyThreadAbove = (threshold: number = 50, endThreads: ThreadState
 }
 
 export const areAllThreadsBelow = (threshold: number = 50, endThreads: ThreadState[] = getThreadState()): boolean => {
+	if (!startState) {
+		console.error('You must run `await startProfilingCpu()` before you can get the thread state')
+		throw new Error('Start threads not available')
+	}
 	const thresholdDecimal = threshold / 100
 	return startState!.every((startThread, index) => {
 		const usage = calculateThreadUsage(startThread, endThreads[index])
@@ -175,6 +196,10 @@ export const getMedThread = (inPercent: boolean = true, precision: number = 5, t
 // CPU
 
 export const getCpuUsage = (inPercent: boolean = true, precision: number = 5, endThreads: ThreadState[] = getThreadState()): number => {
+	if (!startState) {
+		console.error('You must run `await startProfilingCpu()` before you can get the thread state')
+		throw new Error('Start threads not available')
+	}
 	const totalStart = startState!.reduce((acc, cpu) => {
 		acc.total += cpu.total
 		acc.idle += cpu.idle

@@ -22,6 +22,8 @@ export interface ThreadState {
 }
 export type ThreadUsage = number;
 export declare const getThreadState: () => ThreadState[];
+export declare const startProfilingCpu: () => Promise<void>;
+export declare const stopProfilingCpu: () => void;
 export declare const cleanup: () => void;
 export declare const getThreadUsage: (startThreads?: ThreadState[] | null, endThreads?: ThreadState[]) => ThreadUsage[];
 export declare const isAnyThreadBelow: (threshold?: number, endThreads?: ThreadState[]) => boolean;

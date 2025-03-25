@@ -2,8 +2,6 @@
 .idea
 .obsidian
 .vscode
-package-lock.json
-composer.lock
 blueprint.json
 
 # Logs

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[2226],{8132:e=>{e.exports=JSON.parse('{"authors":[{"name":"Phillip Faciana","title":"Lead Developer","url":"https://renderdev.com","page":null,"socials":{"github":"https://github.com/pfaciana"},"key":"pfaciana","count":1}]}')}}]);

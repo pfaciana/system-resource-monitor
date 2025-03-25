@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[6706],{6725:e=>{e.exports=JSON.parse('{"tags":[{"label":"hello","permalink":"/system-resource-monitor/blog/tags/hello","count":1}]}')}}]);

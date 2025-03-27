@@ -13,6 +13,7 @@ Thumbs.db
 
 # Build & Development
 coverage/
+docs/
 .nyc_output/
 lib-cov/
 *.lcov

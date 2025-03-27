@@ -8,6 +8,7 @@
 /.build	export-ignore
 /build	export-ignore
 /composer.lock	export-ignore
+/docs	export-ignore
 /node_modules	export-ignore
 /package-lock.json	export-ignore
 /yarn.lock	export-ignore

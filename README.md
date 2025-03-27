@@ -12,9 +12,23 @@ This project is suitable for applications that require real-time monitoring of s
 
 ### Installation
 
+You can install this package from either JSR or npm:
+
+#### JSR
+
+```bash
+npx jsr add @rndr/system-resource-monitor
+```
+
+#### npm
+
 ```bash
 npm i system-resource-monitor
 ```
+
+> **Notice:** The package name differs depending on the registry:
+> - JSR: `@rndr/system-resource-monitor`
+> - npm: `system-resource-monitor`
 
 ### Usage Examples
 
@@ -28,7 +42,7 @@ import {
 	getPhysicalCoreCount,
 	isAnyThreadAbove,
 	isCpuAbove,
-} from 'system-resource-monitor'
+} from 'system-resource-monitor' // or '@rndr/system-resource-monitor' with JSR
 
 // Initialize CPU profiling (required for CPU and thread monitoring)
 await startProfilingCpu()
@@ -114,5 +128,5 @@ While this library provides useful functionality for monitoring system resources
 - The core usage logic relies on timing differences between CPU states, which can be inaccurate or unreliable under heavy load or virtualized environments. The accuracy of the resource usage calculations depends on a sampling interval of one second of the system's workload.
 - Calculating CPU usage in real-time is imprecise, especially if your application's workload changes frequently. You should interpret these metrics as estimates.
 - This is not recommended for production environments or precise performance analytics. If you require more extensive system monitoring capabilities or integration with external monitoring tools, you may consider alternatives like:
-	- [systeminformation](https://github.com/sebhildebrandt/systeminformation): A powerful Node.js library for retrieving detailed system information, including CPU, memory, disk, network, and process-related data.
-	- [node-os-utils](https://github.com/SunilWang/node-os-utils): A Node.js library that provides a set of utility functions for retrieving system information, including CPU usage, memory usage, and disk usage.
+  - [systeminformation](https://github.com/sebhildebrandt/systeminformation): A powerful Node.js library for retrieving detailed system information, including CPU, memory, disk, network, and process-related data.
+  - [node-os-utils](https://github.com/SunilWang/node-os-utils): A Node.js library that provides a set of utility functions for retrieving system information, including CPU usage, memory usage, and disk usage.

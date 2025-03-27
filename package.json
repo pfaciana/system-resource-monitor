@@ -1,7 +1,7 @@
 {
 	"name": "system-resource-monitor",
 	"description": "A set of Node.js/Bun/Deno utility functions for monitoring system resources such as CPU usage, memory usage, and thread utilization",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"author": "Phil Faciana <phil@renderdev.com> (https://renderdev.com/)",
 	"license": "MIT",
 	"homepage": "https://github.com/pfaciana/system-resource-monitor",
@@ -9,18 +9,24 @@
 		"type": "git",
 		"url": "https://github.com/pfaciana/system-resource-monitor.git"
 	},
+	"scripts": {
+		"build": "tsc --project tsconfig.json"
+	},
 	"type": "module",
-	"main": "./dist/index.js",
-	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
 			"types": "./dist/index.d.ts"
 		}
 	},
-	"scripts": {
-		"build": "tsc --project tsconfig.json"
-	},
+	"files": [
+		"dist",
+		"src",
+		"CHANGELOG.md",
+		"DEVELOPER_CHANGELOG.md",
+		"LICENSE",
+		"README.md"
+	],
 	"devDependencies": {
 		"@types/node": "^22",
 		"typescript": "^5.8.2"

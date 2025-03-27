@@ -38,7 +38,7 @@ jobs:
         id: sync_versions
         uses: pfaciana/version-sync@v1
         with:
-          json-files: package.json
+          json-files: package.json jsr.json
           release-type: patch
           force-release: ${{ github.event.inputs.force-release || '' }}
           commit-message: Update version to {version}
@@ -124,3 +124,17 @@ jobs:
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-to-jsr:
+    needs: get-release-tag
+    if: needs.get-release-tag.outputs.tag-name != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # The OIDC ID token is used for authentication with JSR.
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Publish to JSR
+        run: npx jsr publish

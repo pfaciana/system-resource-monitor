@@ -25,7 +25,20 @@ import TabItem from '@theme/TabItem';
   yarn add system-resource-monitor
   ```
   </TabItem>
+  <TabItem value="jsr" label="JSR">
+  ```bash
+  npx jsr add @rndr/system-resource-monitor
+  ```
+  </TabItem>
 </Tabs>
+
+:::warning Package Name Difference
+Note that the package is published as:
+- `system-resource-monitor` on npm, yarn, and pnpm
+- `@rndr/system-resource-monitor` on JSR
+
+The documentation will use the NPM package name for consistency, but use the one right for your package manager.
+:::
 
 ## Requirements
 
@@ -40,9 +53,21 @@ The library is written in TypeScript with strict type checking enabled. Even if 
 
 You can verify the installation by checking core informat
 
-```javascript
+<Tabs groupId="package-manager">
+  <TabItem value="npm" label="npm">
+  ```javascript
 import { getLogicalCoreCount, getPhysicalCoreCount } from 'system-resource-monitor';
 
 console.log(`Logical cores: ${getLogicalCoreCount()}`);
 console.log(`Physical cores: ${getPhysicalCoreCount()}`);
 ```
+  </TabItem>
+  <TabItem value="jsr" label="JSR">
+  ```typescript
+import { getLogicalCoreCount, getPhysicalCoreCount } from '@rndr/system-resource-monitor'; 
+
+console.log(`Logical cores: ${getLogicalCoreCount()}`);
+console.log(`Physical cores: ${getPhysicalCoreCount()}`);
+```
+  </TabItem>
+</Tabs>

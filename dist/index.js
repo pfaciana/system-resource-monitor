@@ -1,14 +1,84 @@
+/**
+ * @module system-resource-monitor
+ *
+ * A cross-platform utility for monitoring system resources such as CPU usage, memory usage, and thread utilization.
+ * This module provides functions to check CPU and memory usage and thread states across different operating systems
+ * (Windows, macOS, and Linux).
+ *
+ * @example
+ * ```ts
+ * import { startProfilingCpu, getCpuUsage, getMemoryUsage, cleanup } from '@rndr/system-resource-monitor';
+ *
+ * // Start profiling the CPU
+ * await startProfilingCpu();
+ *
+ * // Get CPU and memory usage
+ * console.log(`CPU usage: ${getCpuUsage()}%`);
+ * console.log(`Memory usage: ${getMemoryUsage(true)}%`);
+ *
+ * // Clean up when done
+ * stopProfilingCpu();
+ * ```
+ */
 import os from 'node:os';
 import { execSync } from 'node:child_process';
+/**
+ * Creates a promise that resolves after a specified number of milliseconds.
+ *
+ * @example
+ * ```ts
+ * // Wait for 1 second
+ * await delay(1000);
+ * ```
+ *
+ * @param {number} ms - The number of milliseconds to delay
+ * @returns {Promise<void>} A promise that resolves after the specified delay
+ */
 export const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+/**
+ * Rounds a number to a specified precision.
+ *
+ * @example
+ * ```ts
+ * // Round to 2 decimal places
+ * const value = round(10.12345, 2); // Returns 10.12
+ * ```
+ *
+ * @param {number} num - The number to round
+ * @param {number} [precision=0] - The number of decimal places to round to
+ * @returns {number} The rounded number
+ */
 export const round = (num, precision = 0) => {
     const factor = Math.pow(10, precision);
     return Math.round(num * factor) / factor;
 };
 const platform = os.platform();
+/**
+ * Returns the current operating system platform.
+ *
+ * @example
+ * ```ts
+ * const platform = getPlatform();
+ * if (platform === 'win32') {
+ *   console.log('Running on Windows');
+ * }
+ * ```
+ *
+ * @returns {string} The platform identifier ('win32', 'darwin', 'linux', etc.)
+ */
 export const getPlatform = () => platform;
 // Cores
 const logicalCoreCount = os.cpus().length;
+/**
+ * Returns the number of logical CPU cores available on the system.
+ *
+ * @example
+ * ```ts
+ * console.log(`This system has ${getLogicalCoreCount()} logical cores`);
+ * ```
+ *
+ * @returns {number} The number of logical CPU cores
+ */
 export const getLogicalCoreCount = () => logicalCoreCount;
 const physicalCores = (() => {
     try {
@@ -34,8 +104,30 @@ const physicalCores = (() => {
     }
     return Math.max(1, Math.floor(logicalCoreCount / 2));
 })();
+/**
+ * Returns the number of physical CPU cores available on the system.
+ * Uses platform-specific commands to determine the actual physical core count.
+ *
+ * @example
+ * ```ts
+ * console.log(`This system has ${getPhysicalCoreCount()} physical cores`);
+ * ```
+ *
+ * @returns {number} The number of physical CPU cores
+ */
 export const getPhysicalCoreCount = () => physicalCores;
 // Threads
+/**
+ * Gets the current state of all CPU threads.
+ *
+ * @example
+ * ```ts
+ * const threadStates = getThreadState();
+ * console.log(`Thread 0 total time: ${threadStates[0].total}`);
+ * ```
+ *
+ * @returns {ThreadState[]} An array of thread states
+ */
 export const getThreadState = () => {
     const cpus = os.cpus();
     return cpus.map((cpu, index) => {
@@ -46,6 +138,13 @@ export const getThreadState = () => {
 };
 let startState = null;
 let stateUpdateInterval = null;
+/**
+ * Internal function to get and periodically update the baseline thread state.
+ *
+ * @private
+ *
+ * @returns {Promise<ThreadState[]>} A promise that resolves to the baseline thread state
+ */
 const getStartState = async () => {
     if (!startState) {
         startState = getThreadState();
@@ -64,12 +163,47 @@ const getStartState = async () => {
     }
     return startState;
 };
+/**
+ * Starts CPU profiling by establishing a baseline for CPU usage measurements.
+ * Must be called before using functions that compare current CPU usage to a baseline.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * // Now you can use functions like getCpuUsage(), getThreadUsage(), etc.
+ * ```
+ *
+ * @returns {Promise<void>} A promise that resolves when profiling has started
+ */
 export const startProfilingCpu = async () => {
     await getStartState();
 };
+/**
+ * Stops CPU profiling and cleans up resources.
+ *
+ * @example
+ * ```ts
+ * // When done with CPU profiling
+ * stopProfilingCpu();
+ * ```
+ *
+ * @returns {void}
+ */
 export const stopProfilingCpu = () => {
     cleanup();
 };
+/**
+ * Cleans up resources used by the CPU profiling system.
+ * Stops interval timers and resets the baseline state.
+ *
+ * @example
+ * ```ts
+ * // When done with the library
+ * cleanup();
+ * ```
+ *
+ * @returns {void}
+ */
 export const cleanup = () => {
     if (stateUpdateInterval) {
         clearInterval(stateUpdateInterval);
@@ -89,11 +223,35 @@ process.on('SIGTERM', () => {
     cleanup();
     process.exit(0);
 });
+/**
+ * Calculates the usage of a single thread by comparing start and end states.
+ *
+ * @private
+ *
+ * @param {ThreadState} startThread - The initial state of the thread
+ * @param {ThreadState} endThread - The current state of the thread
+ * @returns {ThreadUsage} A number between 0 and 1 representing the thread usage
+ */
 const calculateThreadUsage = (startThread, endThread) => {
     const totalDiff = endThread.total - startThread.total;
     const idleDiff = endThread.idle - startThread.idle;
     return (totalDiff - idleDiff) / totalDiff;
 };
+/**
+ * Gets the usage of all CPU threads by comparing start and end states.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * const usage = getThreadUsage();
+ * console.log(`Thread 0 usage: ${usage[0] * 100}%`);
+ * ```
+ *
+ * @param {ThreadState[] | null} [startThreads=startState] - The initial state of threads, defaults to stored start state
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {ThreadUsage[]} An array of thread usage values between 0 and 1
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const getThreadUsage = (startThreads = startState, endThreads = getThreadState()) => {
     if (!startThreads) {
         console.error('You must run `await startProfilingCpu()` before you can get the thread state');
@@ -103,6 +261,22 @@ export const getThreadUsage = (startThreads = startState, endThreads = getThread
         return calculateThreadUsage(startThread, endThreads[index]);
     });
 };
+/**
+ * Checks if any thread's CPU usage is below a specified threshold.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * if (isAnyThreadBelow(20)) {
+ *   console.log('At least one thread is below 20% usage');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {boolean} True if any thread is below the threshold
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const isAnyThreadBelow = (threshold = 50, endThreads = getThreadState()) => {
     if (!startState) {
         console.error('You must run `await startProfilingCpu()` before you can get the thread state');
@@ -114,9 +288,41 @@ export const isAnyThreadBelow = (threshold = 50, endThreads = getThreadState()) 
         return usage < thresholdDecimal;
     });
 };
+/**
+ * Checks if any thread's CPU usage is above a specified threshold.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * if (isAnyThreadAbove(80)) {
+ *   console.log('At least one thread is above 80% usage');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {boolean} True if any thread is above the threshold
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const isAnyThreadAbove = (threshold = 50, endThreads = getThreadState()) => {
     return !areAllThreadsBelow(threshold, endThreads);
 };
+/**
+ * Checks if all threads' CPU usage is below a specified threshold.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * if (areAllThreadsBelow(60)) {
+ *   console.log('All threads are below 60% usage');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {boolean} True if all threads are below the threshold
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const areAllThreadsBelow = (threshold = 50, endThreads = getThreadState()) => {
     if (!startState) {
         console.error('You must run `await startProfilingCpu()` before you can get the thread state');
@@ -128,27 +334,123 @@ export const areAllThreadsBelow = (threshold = 50, endThreads = getThreadState()
         return usage < thresholdDecimal;
     });
 };
+/**
+ * Checks if all threads' CPU usage is above a specified threshold.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * if (areAllThreadsAbove(30)) {
+ *   console.log('All threads are above 30% usage');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {boolean} True if all threads are above the threshold
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const areAllThreadsAbove = (threshold = 50, endThreads = getThreadState()) => {
     return !isAnyThreadBelow(threshold, endThreads);
 };
+/**
+ * Gets the minimum CPU usage across all threads.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * const minUsage = getMinThread(); // Returns the minimum usage as a percentage
+ * console.log(`Minimum thread usage: ${minUsage}%`);
+ * ```
+ *
+ * @param {boolean} [inPercent=true] - Whether to return the result as a percentage (0-100) or decimal (0-1)
+ * @param {number} [precision=5] - The number of decimal places to round to
+ * @param {ThreadUsage[]} [threadsUsage=getThreadUsage()] - Thread usage values to analyze
+ * @returns {number} The minimum thread usage value
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const getMinThread = (inPercent = true, precision = 5, threadsUsage = getThreadUsage()) => {
     const minThread = Math.min(...threadsUsage);
     return round(inPercent ? minThread * 100 : minThread, precision);
 };
+/**
+ * Gets the maximum CPU usage across all threads.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * const maxUsage = getMaxThread(); // Returns the maximum usage as a percentage
+ * console.log(`Maximum thread usage: ${maxUsage}%`);
+ * ```
+ *
+ * @param {boolean} [inPercent=true] - Whether to return the result as a percentage (0-100) or decimal (0-1)
+ * @param {number} [precision=5] - The number of decimal places to round to
+ * @param {ThreadUsage[]} [threadsUsage=getThreadUsage()] - Thread usage values to analyze
+ * @returns {number} The maximum thread usage value
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const getMaxThread = (inPercent = true, precision = 5, threadsUsage = getThreadUsage()) => {
     const maxThread = Math.max(...threadsUsage);
     return round(inPercent ? maxThread * 100 : maxThread, precision);
 };
+/**
+ * Gets the average CPU usage across all threads.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * const avgUsage = getAvgThread(); // Returns the average usage as a percentage
+ * console.log(`Average thread usage: ${avgUsage}%`);
+ * ```
+ *
+ * @param {boolean} [inPercent=true] - Whether to return the result as a percentage (0-100) or decimal (0-1)
+ * @param {number} [precision=5] - The number of decimal places to round to
+ * @param {ThreadUsage[]} [threadsUsage=getThreadUsage()] - Thread usage values to analyze
+ * @returns {number} The average thread usage value
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const getAvgThread = (inPercent = true, precision = 5, threadsUsage = getThreadUsage()) => {
     const avgThread = threadsUsage.reduce((acc, item) => acc + item, 0) / threadsUsage.length;
     return round(inPercent ? avgThread * 100 : avgThread, precision);
 };
+/**
+ * Gets the median CPU usage across all threads.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * const medUsage = getMedThread(); // Returns the median usage as a percentage
+ * console.log(`Median thread usage: ${medUsage}%`);
+ * ```
+ *
+ * @param {boolean} [inPercent=true] - Whether to return the result as a percentage (0-100) or decimal (0-1)
+ * @param {number} [precision=5] - The number of decimal places to round to
+ * @param {ThreadUsage[]} [threadsUsage=getThreadUsage()] - Thread usage values to analyze
+ * @returns {number} The median thread usage value
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const getMedThread = (inPercent = true, precision = 5, threadsUsage = getThreadUsage()) => {
     threadsUsage.sort((a, b) => a - b);
     const medThread = threadsUsage[Math.floor(threadsUsage.length / 2)];
     return round(inPercent ? medThread * 100 : medThread, precision);
 };
 // CPU
+/**
+ * Gets the overall CPU usage by comparing the start and current states of all threads.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * const cpuUsage = getCpuUsage(); // Returns CPU usage as a percentage
+ * console.log(`Current CPU usage: ${cpuUsage}%`);
+ * ```
+ *
+ * @param {boolean} [inPercent=true] - Whether to return the result as a percentage (0-100) or decimal (0-1)
+ * @param {number} [precision=5] - The number of decimal places to round to
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {number} The overall CPU usage value
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const getCpuUsage = (inPercent = true, precision = 5, endThreads = getThreadState()) => {
     if (!startState) {
         console.error('You must run `await startProfilingCpu()` before you can get the thread state');
@@ -169,29 +471,126 @@ export const getCpuUsage = (inPercent = true, precision = 5, endThreads = getThr
     const cpuUsage = (totalDiff - idleDiff) / totalDiff;
     return round(inPercent ? cpuUsage * 100 : cpuUsage, precision);
 };
+/**
+ * Checks if CPU usage is below a specified threshold.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * if (isCpuBelow(20)) {
+ *   console.log('CPU usage is below 20%');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {boolean} True if CPU usage is below the threshold
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const isCpuBelow = (threshold = 50, endThreads = getThreadState()) => {
     return getCpuUsage(true, 5, endThreads) < threshold;
 };
+/**
+ * Checks if CPU usage is above a specified threshold.
+ *
+ * @example
+ * ```ts
+ * await startProfilingCpu();
+ * if (isCpuAbove(80)) {
+ *   console.log('CPU usage is above 80%');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @param {ThreadState[]} [endThreads=getThreadState()] - The current state of threads
+ * @returns {boolean} True if CPU usage is above the threshold
+ * @throws {Error} If startProfilingCpu() has not been called before
+ */
 export const isCpuAbove = (threshold = 50, endThreads = getThreadState()) => {
     return !isCpuBelow(threshold, endThreads);
 };
 // Memory
 const totalMemory = os.totalmem();
+/**
+ * Gets the total system memory.
+ *
+ * @example
+ * ```ts
+ * const totalMemGB = getTotalMemory(true, 2);
+ * console.log(`Total system memory: ${totalMemGB} GB`);
+ * ```
+ *
+ * @param {boolean} [inGB=false] - Whether to return the result in gigabytes (true) or bytes (false)
+ * @param {number} [precision=0] - The number of decimal places to round to
+ * @returns {number} The total system memory
+ */
 export const getTotalMemory = (inGB = false, precision = 0) => {
     return inGB ? round(totalMemory / 1024 / 1024 / 1024, precision) : totalMemory;
 };
+/**
+ * Gets the used system memory.
+ *
+ * @example
+ * ```ts
+ * const usedMemGB = getUsedMemory(true, 2);
+ * console.log(`Used system memory: ${usedMemGB} GB`);
+ * ```
+ *
+ * @param {boolean} [inGB=false] - Whether to return the result in gigabytes (true) or bytes (false)
+ * @param {number} [precision=0] - The number of decimal places to round to
+ * @returns {number} The used system memory
+ */
 export const getUsedMemory = (inGB = false, precision = 0) => {
     let usedMemory = totalMemory - os.freemem();
     return inGB ? round(usedMemory / 1024 / 1024 / 1024, precision) : usedMemory;
 };
+/**
+ * Gets the memory usage as a ratio or percentage.
+ *
+ * @example
+ * ```ts
+ * const memUsage = getMemoryUsage(true);
+ * console.log(`Current memory usage: ${memUsage}%`);
+ * ```
+ *
+ * @param {boolean} [inPercent=false] - Whether to return the result as a percentage (0-100) or decimal (0-1)
+ * @param {number} [precision=5] - The number of decimal places to round to
+ * @returns {number} The memory usage value
+ */
 export const getMemoryUsage = (inPercent = false, precision = 5) => {
     let memoryUsage = (getUsedMemory() / totalMemory);
     memoryUsage = inPercent ? memoryUsage * 100 : memoryUsage;
     return round(memoryUsage, precision);
 };
+/**
+ * Checks if memory usage is below a specified threshold.
+ *
+ * @example
+ * ```ts
+ * if (isMemoryBelow(70)) {
+ *   console.log('Memory usage is below 70%');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @returns {boolean} True if memory usage is below the threshold
+ */
 export const isMemoryBelow = (threshold = 50) => {
     return getMemoryUsage(true) < threshold;
 };
+/**
+ * Checks if memory usage is above a specified threshold.
+ *
+ * @example
+ * ```ts
+ * if (isMemoryAbove(80)) {
+ *   console.log('Memory usage is above 80%');
+ * }
+ * ```
+ *
+ * @param {number} [threshold=50] - The threshold percentage (0-100)
+ * @returns {boolean} True if memory usage is above the threshold
+ */
 export const isMemoryAbove = (threshold = 50) => {
     return !isMemoryBelow(threshold);
 };
